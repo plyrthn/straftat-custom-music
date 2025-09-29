@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+      <GamePath>S:\SteamLibrary\steamapps\common\STRAFTAT</GamePath>
+  <PluginsPath>$(GamePath)\BepInEx\plugins</PluginsPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <PackageReference Include="Lib.Harmony" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\STRAFTAT_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\STRAFTAT_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\STRAFTAT_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\STRAFTAT_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>..\STRAFTAT_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>..\STRAFTAT_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+  <HintPath>$(GamePath)\BepInEx\core\0Harmony.dll</HintPath>
+  <Private>False</Private>
+</Reference>
+  </ItemGroup>
+
+<Target Name="CopyToGame" AfterTargets="Build">
+  <ItemGroup>
+    <FilesToCopy Include="$(TargetPath)" />
+    <FilesToCopy Include="$(OutDir)*.dll" Exclude="$(TargetPath)" />
+  </ItemGroup>
+  <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(PluginsPath)" />
+  <Message Text="Copied $(TargetFileName) and dependencies to $(PluginsPath)" Importance="high" />
+</Target>
+
+</Project>

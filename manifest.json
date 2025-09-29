@@ -1,0 +1,9 @@
+{
+  "name": "STRAFTAT_Custom_Music",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/plyrthn/straftat-custom-music",
+  "description": "Add custom MP3/OGG/WAV files to STRAFTAT's music playlist. Supports ID3 tags, metadata parsing, and mixed or custom-only modes.",
+  "dependencies": [
+    "BepInEx-BepInExPack-5.4.2100"
+  ]
+}
