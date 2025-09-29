@@ -1,4 +1,4 @@
-﻿using BepInEx;
+using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
@@ -8,38 +8,88 @@ using System.IO;
 using UnityEngine;
 using System.Linq;
 using System.Reflection;
+using ComputerysModdingUtilities;
 
-[BepInPlugin("com.plyrthn.straftat.custommusic", "STRAFTAT Custom Music", "1.0.0")]
+[assembly: StraftatMod(isVanillaCompatible: true)]
+
+[BepInPlugin("com.plyrthn.straftat.custommusic", "STRAFTAT Custom Music", "1.0.1")]
+
 public class CustomMusicPlugin : BaseUnityPlugin
+
+
+
 {
     internal new static ManualLogSource Logger = null!;
     private static string CustomMusicFolder = null!;
     private static readonly List<CustomMusicInfo> PendingMusicFiles = new List<CustomMusicInfo>();
 
+
+
+
+
+
     // config stuff
+
+
+
+
+
+
+
     private static ConfigEntry<bool> CustomOnlyMode = null!;
     private static bool CustomOnlyModeValue = false; // backup if config fails
+
+
+
+
+
+
+
+
+
 
     void Awake()
     {
         Logger = base.Logger;
         CustomMusicFolder = Path.Combine(Paths.ConfigPath, "CustomMusic");
 
+
+
+
+
+
+
+
+
+
         if (!Directory.Exists(CustomMusicFolder))
         {
             Directory.CreateDirectory(CustomMusicFolder);
             CreateSampleFiles();
             Logger.LogInfo($"Created custom music folder at: {CustomMusicFolder}");
+
+
+
+
+
+
+
         }
 
         // config setup
+
+
+
+
         Logger.LogInfo("Setting up config...");
         try
         {
             CustomOnlyMode = Config.Bind("General", "CustomOnlyMode", false,
+
                 "Set to true to replace all original music with only custom tracks. Set to false to mix custom tracks with original soundtrack.");
             CustomOnlyModeValue = CustomOnlyMode.Value;
             Logger.LogInfo($"Config loaded: CustomOnlyMode = {CustomOnlyModeValue}");
+
         }
         catch (System.Exception ex)
         {
@@ -842,4 +892,40 @@ public class CustomMusicInfo
     public string FilePath = "";
     public string FileName = "";
     public string ArtistName = "";
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
